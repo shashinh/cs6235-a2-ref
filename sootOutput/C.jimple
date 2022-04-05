@@ -1,0 +1,74 @@
+class C extends java.lang.Thread
+{
+    Buf b;
+
+    public void run()
+    {
+        java.lang.Throwable temp$1;
+        Buf temp$0;
+        C this;
+        java.lang.Exception e;
+
+        this := @this: C;
+
+     label1:
+        temp$0 = this.<C: Buf b>;
+
+        entermonitor temp$0;
+
+     label2:
+        virtualinvoke this.<C: void f2()>();
+
+        exitmonitor temp$0;
+
+        goto label4;
+
+     label3:
+        temp$1 := @caughtexception;
+
+        exitmonitor temp$0;
+
+     label4:
+        throw temp$1;
+
+     label5:
+        e := @caughtexception;
+
+        goto label6;
+
+     label6:
+        return;
+
+        catch java.lang.Throwable from label2 to label4 with label3;
+        catch java.lang.Exception from label1 to label5 with label5;
+    }
+
+    public void f2()
+    {
+        C this;
+
+        this := @this: C;
+
+        return;
+    }
+
+    public void f3()
+    {
+        C this;
+
+        this := @this: C;
+
+        return;
+    }
+
+    void <init>()
+    {
+        C this;
+
+        this := @this: C;
+
+        specialinvoke this.<java.lang.Thread: void <init>()>();
+
+        return;
+    }
+}
