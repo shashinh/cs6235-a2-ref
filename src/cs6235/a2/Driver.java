@@ -42,8 +42,11 @@ public class Driver {
 				"-src-prec", "java",
 				"-p", "cg.cha", "enabled:false",
 				"-p", "cg.spark", "enabled:true",
+				"-exclude", "java.*",
+				"-exclude", "jdk.*",
+				"-exclude", "sun.*",
 				"-f", "J",
-				//"-d", "output",
+				//"-process-dir", classPath,
 				mainClass
 				
 		};

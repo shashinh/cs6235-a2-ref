@@ -1,5 +1,6 @@
 package cs6235.a2.submission;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,9 +30,21 @@ public class MHPAnalysis extends AnalysisBase {
 		//say we want to obtain all classes in the scene that extend Thread
 		SootClass threadClass = Scene.v().getSootClass("java.lang.Thread");
 		List<SootClass> classes = Scene.v().getActiveHierarchy().getSubclassesOf(threadClass);
-		
 		System.out.println(classes + " extend Thread");
+		System.out.println();
 		
+
+		//observe that it returned a bunch of library classes as well - you may filter them out by package name, like so
+		//create a copy, because getSubclassesOf returns an unmodifiable collection
+		List<SootClass> filteredClasses = new LinkedList<SootClass>(classes);
+		filteredClasses.removeIf(c -> 
+									(c.getName().startsWith("java.") || 
+									(c.getName().startsWith("sun.")) || 
+									(c.getName().startsWith("jdk."))));
+
+
+		System.out.println(filteredClasses);
+		System.out.println();
 		
 		//say we want to know the runtime types of each local in Main.main
 		SootMethod mainMethod = Scene.v().getMainMethod();
